@@ -1,5 +1,5 @@
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import logoImage from "./assets/logo/logo.png";
 import logoFooterImage from "./assets/logo/logo-footer.png";
@@ -102,6 +102,10 @@ const projects = projectImages.map((image, index) => ({
 
 
 function Header() {
+  const [collectionsOpen, setCollectionsOpen] = useState(false);
+
+  const closeCollections = () => setCollectionsOpen(false);
+
   return (
     <header className="site-header">
       <a className="brand" href="#home" aria-label="ARK STUDIO home">
@@ -110,10 +114,66 @@ function Header() {
 
       <nav className="main-nav" aria-label="Main navigation">
         <a className="active" href="#home">Home</a>
-        <a href="#collections">Collections <span>⌄</span></a>
+
+        <div className="collections-nav-item">
+          <button
+            type="button"
+            className={`collections-trigger ${
+              collectionsOpen ? "is-open" : ""
+            }`}
+            aria-expanded={collectionsOpen}
+            aria-controls="collections-mega-menu"
+            onClick={() => setCollectionsOpen((open) => !open)}
+          >
+            Collections
+            <span className="dropdown-chevron">⌄</span>
+          </button>
+
+          {collectionsOpen && (
+            <div
+              className="collections-mega-menu"
+              id="collections-mega-menu"
+            >
+              <div className="mega-menu-grid">
+                {collections.map((item, index) => {
+                  const slug = item.name
+                    .toLowerCase()
+                    .replaceAll(" ", "-");
+
+                  return (
+                    <a
+                      href={`/collections/${slug}`}
+                      className="mega-menu-card"
+                      key={item.name}
+                      onClick={closeCollections}
+                    >
+                      <div className="mega-menu-image">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          loading="lazy"
+                        />
+
+                        <span className="mega-menu-number">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+
+                      <div className="mega-menu-card-caption">
+                        <span>{item.name}</span>
+                        <span className="mega-menu-arrow">↗</span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+
         <a href="#customization">Customization</a>
         <a href="#projects">Projects</a>
-        <a href="#craftsmanship">About Us</a>
+        <a href="#aboutUs">About Us</a>
         <a href="#contact">Contact</a>
       </nav>
 
