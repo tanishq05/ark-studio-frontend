@@ -42,7 +42,25 @@ const categories = [
 ];
 
 function ProductListingPage() {
-  const [activeCategory, setActiveCategory] = useState("All Furniture");
+  const categorySlugMap: Record<string, string> = {
+  "bar-stool": "Bar Furniture",
+  "sofa-set": "Sofa Sets",
+  "dining-set": "Dining Sets",
+  swing: "Swings",
+  gazebo: "Gazebos",
+  pergola: "Pergolas",
+  "poolside-furniture": "Poolside Furniture",
+  umbrella: "Umbrellas",
+};
+
+const currentSlug = window.location.pathname
+  .split("/")
+  .filter(Boolean)
+  .pop() ?? "";
+
+const initialCategory = categorySlugMap[currentSlug] ?? "All Furniture";
+
+const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [sortBy, setSortBy] = useState("featured");
 
   const filteredProducts =
@@ -61,7 +79,11 @@ function ProductListingPage() {
       <section className="product-page-hero">
         <div className="product-page-hero-content">
           <p className="product-eyebrow">ARK STUDIO BY LOHAR CREATIONS</p>
-          <h1>Outdoor Furniture</h1>
+          <h1>
+  {activeCategory === "All Furniture"
+    ? "Outdoor Furniture"
+    : activeCategory}
+</h1>
           <p>
             Thoughtfully crafted furniture that brings comfort, character,
             and timeless design to your outdoor spaces.
