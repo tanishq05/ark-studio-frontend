@@ -32,7 +32,7 @@ export default function Header() {
       </a>
 
       <nav className="main-nav" aria-label="Main navigation">
-        <a className="active" href="#home">Home</a>
+        <a className="active" href="/">Home</a>
 
         <div className="collections-nav-item">
           <button

@@ -167,9 +167,9 @@ h2 {
   color: white;
 }
 
-.main-nav a.active {
+/* .main-nav a.active {
   border-bottom: 1px solid #e3d2a7;
-}
+} */
 
 .main-nav a span {
   margin-left: 4px;
