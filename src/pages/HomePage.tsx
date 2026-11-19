@@ -28,8 +28,7 @@ import projectImage11 from "../assets/images/our-projects/our-projects-11.jpeg";
 import projectImage12 from "../assets/images/our-projects/our-projects-12.jpeg";
 import projectImage13 from "../assets/images/our-projects/our-projects-13.jpeg";
 import projectImage14 from "../assets/images/our-projects/our-projects-14.jpeg";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+
 
 
 const collections = [
@@ -378,7 +377,6 @@ function ContactSection() {
 export default function HomePage() {
   return (
     <>
-      <Header />
       <main>
         <HeroSection />
         <CollectionsSection />
@@ -387,7 +385,6 @@ export default function HomePage() {
         <ProjectsSection />
         <ContactSection />
       </main>
-      <Footer />
     </>
   );
 }

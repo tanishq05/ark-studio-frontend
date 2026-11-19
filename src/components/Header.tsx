@@ -10,14 +10,14 @@ import poolLoungerImage from "../assets/images/poolside.png";
 import umbrellaImage from "../assets/images/umbrella.png";
 
 const collections = [
-  { name: "Bar Stool", image: barStoolImage },
-  { name: "Sofa Set", image: sofaSetImage },
-  { name: "Dining Set", image: diningSetImage },
-  { name: "Swing", image: swingImage },
-  { name: "Gazebo", image: gazeboImage },
-  { name: "Pergola", image: pergolaImage },
-  { name: "Pool Lounger", image: poolLoungerImage },
-  { name: "Umbrella", image: umbrellaImage },
+  { name: "Bar Stool", slug: "bar-stool", image: barStoolImage },
+  { name: "Sofa Set", slug: "sofa-set", image: sofaSetImage },
+  { name: "Dining Set", slug: "dining-set", image: diningSetImage },
+  { name: "Swing", slug: "swing", image: swingImage },
+  { name: "Gazebo", slug: "gazebo", image: gazeboImage },
+  { name: "Pergola", slug: "pergola", image: pergolaImage },
+  { name: "Pool Lounger", slug: "poolside-furniture", image: poolLoungerImage },
+  { name: "Umbrella", slug: "umbrella", image: umbrellaImage },
 ];
 
 export default function Header() {
@@ -54,37 +54,31 @@ export default function Header() {
               id="collections-mega-menu"
             >
               <div className="mega-menu-grid">
-                {collections.map((item, index) => {
-                  const slug = item.name
-                    .toLowerCase()
-                    .replaceAll(" ", "-");
+               {collections.map((item, index) => (
+  <a
+    href={`/collections/${item.slug}`}
+    className="mega-menu-card"
+    key={item.slug}
+    onClick={closeCollections}
+  >
+    <div className="mega-menu-image">
+      <img
+        src={item.image}
+        alt={item.name}
+        loading="lazy"
+      />
 
-                  return (
-                    <a
-                      href={`/collections/${slug}`}
-                      className="mega-menu-card"
-                      key={item.name}
-                      onClick={closeCollections}
-                    >
-                      <div className="mega-menu-image">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          loading="lazy"
-                        />
+      <span className="mega-menu-number">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+    </div>
 
-                        <span className="mega-menu-number">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                      </div>
-
-                      <div className="mega-menu-card-caption">
-                        <span>{item.name}</span>
-                        <span className="mega-menu-arrow">↗</span>
-                      </div>
-                    </a>
-                  );
-                })}
+    <div className="mega-menu-card-caption">
+      <span>{item.name}</span>
+      <span className="mega-menu-arrow">↗</span>
+    </div>
+  </a>
+))}
               </div>
             </div>
           )}
