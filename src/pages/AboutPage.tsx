@@ -1,11 +1,11 @@
 
 import "./AboutPage.css";
+import { Link } from "react-router-dom";
 
 import project1 from "../assets/images/our-projects/our-projects-1.png";
 import project2 from "../assets/images/our-projects/our-projects-2.png";
 import project3 from "../assets/images/our-projects/our-projects-3.png";
 import project4 from "../assets/images/our-projects/our-projects-4.png";
-import project5 from "../assets/images/our-projects/our-projects-5.png";
 import project6 from "../assets/images/our-projects/our-projects-6.png";
 import project11 from "../assets/images/our-projects/our-projects-11.jpeg";
 import project12 from "../assets/images/our-projects/our-projects-12.jpeg";
@@ -63,28 +63,23 @@ export default function AboutPage() {
 
       {/* Introduction */}
       <section className="about-intro">
-        <div className="about-intro-label">
-          <span className="about-section-number">01 / WHO WE ARE</span>
-        </div>
+  <div className="about-intro-content">
+    <span className="about-section-number">01 / WHO WE ARE</span>
 
-        <div className="about-intro-content">
-          <h2>
-            More than furniture.
-            <br />
-            A way of living.
-          </h2>
-          <p>
-            ARK STUDIO by Lohar Creations is an outdoor furniture brand and
-            manufacturer focused on creating considered furniture solutions
-            for residential, hospitality and commercial spaces.
-          </p>
-          <p>
-            From relaxed garden settings to thoughtfully planned café
-            environments, we believe furniture should do more than fill a
-            space. It should shape the way people experience it.
-          </p>
-        </div>
-      </section>
+    <div className="about-intro-row">
+      <h2>More than furniture. A way of living.</h2>
+
+      <p>
+        ARK STUDIO by Lohar Creations is an outdoor furniture brand and
+        manufacturer focused on creating considered furniture solutions
+        for residential, hospitality and commercial spaces.
+        From relaxed garden settings to thoughtfully planned café
+        environments, we believe furniture should do more than fill a
+        space. It should shape the way people experience it.
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* Story image section */}
       <section className="about-story">
@@ -157,9 +152,9 @@ export default function AboutPage() {
             where furniture plays an important role in creating memorable
             environments.
           </p>
-          <a href="/projects" className="about-text-link">
+          <Link to="/projects" className="about-text-link">
             Explore our projects <span aria-hidden="true">↗</span>
-          </a>
+          </Link>
         </div>
 
         <div className="about-commercial-images">
@@ -176,9 +171,9 @@ export default function AboutPage() {
         <p>
           Let's create an outdoor space that feels distinctly yours.
         </p>
-        <a href="/#contact" className="about-cta">
+        <Link to="/contact" className="about-cta">
           Start a Conversation <span aria-hidden="true">↗</span>
-        </a>
+        </Link>
       </section>
     </div>
   );

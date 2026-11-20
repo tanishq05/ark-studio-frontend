@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import heroImage from "../assets/images/hero-section.png";
 import barStoolImage from "../assets/images/bar-stool.jpg";
 import sofaSetImage from "../assets/images/sofa-set.jpg";
@@ -28,40 +29,48 @@ import projectImage11 from "../assets/images/our-projects/our-projects-11.jpeg";
 import projectImage12 from "../assets/images/our-projects/our-projects-12.jpeg";
 import projectImage13 from "../assets/images/our-projects/our-projects-13.jpeg";
 import projectImage14 from "../assets/images/our-projects/our-projects-14.jpeg";
-
+import { PencilRuler, Gem, CloudSun } from "lucide-react";
 
 
 const collections = [
   {
     name: "Bar Stool",
+    slug: "bar-stool",
     image: barStoolImage,
   },
   {
     name: "Sofa Set",
+    slug: "sofa-set",
     image: sofaSetImage,
   },
   {
     name: "Dining Set",
+    slug: "dining-set",
     image: diningSetImage,
   },
   {
     name: "Swing",
+    slug: "swing",
     image: swingImage,
   },
   {
     name: "Gazebo",
+    slug: "gazebo",
     image: gazeboImage,
   },
   {
     name: "Pergola",
+    slug: "pergola",
     image: pergolaImage,
   },
   {
     name: "Pool Lounger",
+    slug: "poolside-furniture",
     image: poolLoungerImage,
   },
   {
     name: "Umbrella",
+    slug: "umbrella",
     image: umbrellaImage,
   },
 ];
@@ -124,25 +133,30 @@ function HeroSection() {
         </p>
 
         <div className="hero-actions">
-          <a className="button button-light" href="#collections">
+          <Link className="button button-light" to="/collections">
             Explore Collections <span>→</span>
-          </a>
-          <a className="button button-outline" href="#contact">
+          </Link>
+          <a
+            className="button button-outline"
+            href="https://wa.me/919115555640?text=Hi%2C%20I%20would%20like%20to%20request%20a%20custom%20quote%20for%20outdoor%20furniture."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Get a Custom Quote
           </a>
         </div>
 
         <div className="hero-highlights">
           <div>
-            <span className="highlight-icon">♧</span>
+            <PencilRuler className="highlight-icon" />
             <span>Custom Made</span>
           </div>
           <div>
-            <span className="highlight-icon">▱</span>
+            <Gem className="highlight-icon" />
             <span>Premium Materials</span>
           </div>
           <div>
-            <span className="highlight-icon">◇</span>
+            <CloudSun className="highlight-icon" />
             <span>Weather Durable</span>
           </div>
         </div>
@@ -170,7 +184,7 @@ function CollectionsSection() {
 
       <div className="collection-grid">
         {collections.map((item, index) => (
-          <a className="collection-card" href="#contact" key={item.name}>
+          <Link className="collection-card" to={`/collections/${item.slug}`} key={item.name}>
             <img src={item.image} alt={item.name} loading="lazy" />
             <div className="collection-overlay" />
             <span className="collection-number">0{index + 1}</span>
@@ -178,7 +192,7 @@ function CollectionsSection() {
               <h3>{item.name}</h3>
               <span className="round-arrow">↗</span>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </section>
@@ -278,9 +292,14 @@ function CustomizationSection() {
           </div>
         </div>
 
-        <a className="button button-dark" href="#contact">
+        {/* <a
+          className="button button-dark"
+          href="https://wa.me/919115555640?text=Hi%2C%20I%20would%20like%20to%20request%20the%20ARK%20STUDIO%20product%20catalog."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Start Customizing <span>→</span>
-        </a>
+        </a> */}
       </div>
 
       <div className="custom-image custom-image-right">
@@ -316,7 +335,7 @@ function ProjectsSection() {
           <h2>Spaces We Have Created</h2>
         </div>
         <div className="projects-actions">
-          <a className="text-link" href="#contact">View All Projects <span>→</span></a>
+          <Link className="text-link" to="/projects">View All Projects <span>→</span></Link>
           <div className="project-carousel-controls" aria-label="Project carousel controls">
             <button
               className="project-carousel-button"
@@ -348,10 +367,10 @@ function ProjectsSection() {
         tabIndex={0}
       >
         {projects.map((project) => (
-          <a className="project-card" href="#contact" key={project.name}>
+          <Link className="project-card" to="/projects" key={project.name}>
             <img src={project.image} alt={project.name} loading="lazy" />
             <span>{project.name} ↗</span>
-          </a>
+          </Link>
         ))}
       </div>
     </section>
@@ -367,7 +386,12 @@ function ContactSection() {
         Tell us about your space and furniture requirements.
         Our team will be happy to help.
       </p>
-      <a className="button button-light" href="mailto:YOUR-EMAIL@example.com">
+      <a
+        className="button button-light"
+        href="https://wa.me/919115555640?text=Hi%2C%20I%20would%20like%20to%20request%20the%20ARK%20STUDIO%20product%20catalog."
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Enquire Now <span>→</span>
       </a>
     </section>

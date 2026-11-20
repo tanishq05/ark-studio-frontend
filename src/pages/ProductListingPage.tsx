@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import "./ProductListingPage.css";
 
 import barStoolImage from "../assets/images/bar-stool.jpg";
@@ -42,6 +43,7 @@ const categories = [
 ];
 
 function ProductListingPage() {
+  const { categorySlug } = useParams<{ categorySlug?: string }>();
   const categorySlugMap: Record<string, string> = {
   "bar-stool": "Bar Furniture",
   "sofa-set": "Sofa Sets",
@@ -53,12 +55,7 @@ function ProductListingPage() {
   umbrella: "Umbrellas",
 };
 
-const currentSlug = window.location.pathname
-  .split("/")
-  .filter(Boolean)
-  .pop() ?? "";
-
-const initialCategory = categorySlugMap[currentSlug] ?? "All Furniture";
+const initialCategory = categorySlugMap[categorySlug ?? ""] ?? "All Furniture";
 
 const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [sortBy, setSortBy] = useState("featured");
@@ -92,9 +89,9 @@ const [activeCategory, setActiveCategory] = useState(initialCategory);
       </section>
 
       <div className="product-breadcrumb">
-        <a href="/">Home</a>
+        <Link to="/">Home</Link>
         <span>/</span>
-        <span>Collections</span>
+        <Link to="/collections">Collections</Link>
         <span>/</span>
         <strong>Outdoor Furniture</strong>
       </div>
@@ -146,7 +143,7 @@ const [activeCategory, setActiveCategory] = useState(initialCategory);
                 Looking for a particular size, finish, or design? Talk to us
                 about a custom piece.
               </p>
-              <a href="#product-enquiry">Enquire now ↗</a>
+              <Link to="/contact">Enquire now ↗</Link>
             </div>
           </aside>
 
@@ -172,9 +169,9 @@ const [activeCategory, setActiveCategory] = useState(initialCategory);
                       <p>{product.category}</p>
                       <h3>{product.name}</h3>
                     </div>
-                    <a href="#product-enquiry" aria-label={`Enquire about ${product.name}`}>
+                    <Link to="/contact" aria-label={`Enquire about ${product.name}`}>
                       ↗
-                    </a>
+                    </Link>
                   </div>
                 </article>
               ))}
@@ -196,9 +193,9 @@ const [activeCategory, setActiveCategory] = useState(initialCategory);
             your space, style, and needs.
           </p>
         </div>
-        <a href="/#contact" className="product-enquiry-button">
+        <Link to="/contact" className="product-enquiry-button">
           Discuss Your Requirement <span>↗</span>
-        </a>
+        </Link>
       </section>
     </div>
   );

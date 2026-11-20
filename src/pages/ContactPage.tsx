@@ -1,17 +1,50 @@
 
-import { useState, type FormEvent } from "react";
+import { type FormEvent } from "react";
 import "./ContactPage.css";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
+
+    const formData = new FormData(event.currentTarget);
+
+    const name = formData.get("name")?.toString().trim() || "";
+    const email = formData.get("email")?.toString().trim() || "";
+    const phone = formData.get("phone")?.toString().trim() || "";
+    const address = formData.get("address")?.toString().trim() || "";
+    const interest = formData.get("interest")?.toString() || "";
+    const message = formData.get("message")?.toString().trim() || "";
+
+    const whatsappMessage = `
+Hello ARK STUDIO,
+
+I would like to enquire about your furniture.
+
+Name: ${name}
+Email: ${email || "Not provided"}
+Phone: ${phone}
+Customer Address: ${address}
+Interested In: ${interest || "Not specified"}
+
+Enquiry:
+${message}
+
+Thank you.
+    `.trim();
+
+    const whatsappNumber = "919115555640";
+
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
+
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
   };
 
   return (
     <div className="contact-page">
+
       {/* Hero Section */}
       <section className="contact-hero">
         <span className="contact-eyebrow">
@@ -28,7 +61,7 @@ export default function ContactPage() {
         </p>
       </section>
 
-    {/* Location and Google Map */}
+      {/* Location and Google Map */}
       <section className="contact-location">
         <div className="contact-location-heading">
           <span className="contact-eyebrow">FIND US</span>
@@ -41,22 +74,45 @@ export default function ContactPage() {
             We'd love to welcome you. Visit us at our location in Chandigarh.
           </p>
 
-          <p className="contact-address">
-            Plot No. 162, Industrial Area Phase II,
-            <br />
-            Chandigarh, 160002, India
-          </p>
-
+          {/* Business Address */}
           <a
             href="https://www.google.com/maps/search/?api=1&query=Plot+No+162+Industrial+Area+Phase+II+Chandigarh+160002+India"
             target="_blank"
             rel="noopener noreferrer"
-            className="contact-map-link"
+            className="contact-detail-row contact-address"
           >
-            Get Directions ↗
+            <MapPin className="contact-detail-icon" />
+
+            <span>
+              Plot No. 162, Industrial Area Phase II,
+              <br />
+              Chandigarh, 160002, India
+            </span>
           </a>
+
+          {/* Phone and Email */}
+          <div className="contact-direct-details">
+
+            <a
+              href="tel:+91911555640"
+              className="contact-detail-row"
+            >
+              <Phone className="contact-detail-icon" />
+              <span>9115555640</span>
+            </a>
+
+            <a
+              href="mailto:arkstudios.india@gmail.com"
+              className="contact-detail-row"
+            >
+              <Mail className="contact-detail-icon" />
+              <span>arkstudios.india@gmail.com</span>
+            </a>
+
+          </div>
         </div>
 
+        {/* Google Map */}
         <div className="contact-map">
           <iframe
             title="ARK STUDIO location - Chandigarh"
@@ -70,9 +126,11 @@ export default function ContactPage() {
           />
         </div>
       </section>
-      
+
       {/* Contact Form Section */}
       <section className="contact-main">
+
+        {/* Left Content */}
         <div className="contact-intro">
           <span className="contact-eyebrow">GET IN TOUCH</span>
 
@@ -87,6 +145,7 @@ export default function ContactPage() {
 
           <div className="contact-note">
             <span className="contact-note-number">01</span>
+
             <div>
               <h3>Made to your vision</h3>
               <p>
@@ -97,6 +156,7 @@ export default function ContactPage() {
 
           <div className="contact-note">
             <span className="contact-note-number">02</span>
+
             <div>
               <h3>For every kind of space</h3>
               <p>
@@ -108,6 +168,7 @@ export default function ContactPage() {
 
           <div className="contact-note">
             <span className="contact-note-number">03</span>
+
             <div>
               <h3>Crafted with care</h3>
               <p>
@@ -119,6 +180,7 @@ export default function ContactPage() {
 
         {/* Enquiry Form */}
         <div className="contact-form-wrap">
+
           <div className="contact-form-heading">
             <span className="contact-eyebrow">PROJECT ENQUIRY</span>
             <h2>How can we help?</h2>
@@ -126,9 +188,13 @@ export default function ContactPage() {
           </div>
 
           <form className="contact-form" onSubmit={handleSubmit}>
+
+            {/* Name and Phone */}
             <div className="contact-field-row">
+
               <div className="contact-field">
                 <label htmlFor="contact-name">Your Name *</label>
+
                 <input
                   id="contact-name"
                   name="name"
@@ -140,6 +206,7 @@ export default function ContactPage() {
 
               <div className="contact-field">
                 <label htmlFor="contact-phone">Phone Number *</label>
+
                 <input
                   id="contact-phone"
                   name="phone"
@@ -148,19 +215,35 @@ export default function ContactPage() {
                   required
                 />
               </div>
+
             </div>
 
+            {/* Email */}
             <div className="contact-field">
-              <label htmlFor="contact-email">Email Address *</label>
+              <label htmlFor="contact-email">Email Address</label>
+
               <input
                 id="contact-email"
                 name="email"
                 type="email"
                 placeholder="Enter your email address"
+              />
+            </div>
+
+            {/* Customer Address */}
+            <div className="contact-field">
+              <label htmlFor="contact-address">Your Address *</label>
+
+              <textarea
+                id="contact-address"
+                name="address"
+                rows={2}
+                placeholder="Enter your city, area or delivery address"
                 required
               />
             </div>
 
+            {/* Furniture Interest */}
             <div className="contact-field">
               <label htmlFor="contact-interest">
                 What are you interested in?
@@ -174,16 +257,38 @@ export default function ContactPage() {
                 <option value="" disabled>
                   Select an option
                 </option>
-                <option value="outdoor-furniture">Outdoor Furniture</option>
-                <option value="dining-furniture">Dining Furniture</option>
-                <option value="sofa-seating">Sofa & Seating</option>
-                <option value="gazebos-pergolas">Gazebos & Pergolas</option>
-                <option value="custom-furniture">Custom Furniture</option>
-                <option value="commercial-project">Commercial Project</option>
-                <option value="other">Other</option>
+
+                <option value="Outdoor Furniture">
+                  Outdoor Furniture
+                </option>
+
+                <option value="Dining Furniture">
+                  Dining Furniture
+                </option>
+
+                <option value="Sofa & Seating">
+                  Sofa & Seating
+                </option>
+
+                <option value="Gazebos & Pergolas">
+                  Gazebos & Pergolas
+                </option>
+
+                <option value="Custom Furniture">
+                  Custom Furniture
+                </option>
+
+                <option value="Commercial Project">
+                  Commercial Project
+                </option>
+
+                <option value="Other">
+                  Other
+                </option>
               </select>
             </div>
 
+            {/* Project Message */}
             <div className="contact-field">
               <label htmlFor="contact-message">
                 Tell us about your project *
@@ -198,16 +303,12 @@ export default function ContactPage() {
               />
             </div>
 
+            {/* WhatsApp Submit Button */}
             <button className="contact-submit" type="submit">
-              Send Enquiry <span>↗</span>
+              Send Enquiry via WhatsApp
+              <span>↗</span>
             </button>
 
-            {submitted && (
-              <p className="contact-form-notice" role="status">
-                Your details have been entered, but the form is not connected
-                to an email or enquiry system yet.
-              </p>
-            )}
           </form>
         </div>
       </section>
@@ -225,7 +326,6 @@ export default function ContactPage() {
         <p>Let's bring your ideas to life.</p>
       </section>
 
-  
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import logoImage from "../assets/logo/logo.png";
 import barStoolImage from "../assets/images/bar-stool.jpg";
 import sofaSetImage from "../assets/images/sofa-set.jpg";
@@ -27,12 +28,12 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <a className="brand" href="#home" aria-label="ARK STUDIO home">
+      <Link className="brand" to="/" aria-label="ARK STUDIO home">
         <img src={logoImage} alt="ARK STUDIO by Lohar Creations" />
-      </a>
+      </Link>
 
       <nav className="main-nav" aria-label="Main navigation">
-        <a className="active" href="/">Home</a>
+        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/">Home</NavLink>
 
         <div className="collections-nav-item">
           <button
@@ -55,8 +56,8 @@ export default function Header() {
             >
               <div className="mega-menu-grid">
                {collections.map((item, index) => (
-  <a
-    href={`/collections/${item.slug}`}
+  <Link
+    to={`/collections/${item.slug}`}
     className="mega-menu-card"
     key={item.slug}
     onClick={closeCollections}
@@ -77,7 +78,7 @@ export default function Header() {
       <span>{item.name}</span>
       <span className="mega-menu-arrow">↗</span>
     </div>
-  </a>
+  </Link>
 ))}
               </div>
             </div>
@@ -85,14 +86,14 @@ export default function Header() {
         </div>
 
         {/* <a href="#customization">Customization</a> */}
-        <a href="/projects">Projects</a>
-        <a href="/about">About Us</a>
-        <a href="/contact">Contact</a>
+        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/projects">Projects</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/about">About Us</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/contact">Contact</NavLink>
       </nav>
 
-      <a className="header-cta" href="/contact">
+      <Link className="header-cta" to="/contact">
   Enquire Now
-</a>
+</Link>
     </header>
   );
 }
