@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logoImage from "../assets/logo/logo.png";
 import barStoolImage from "../assets/images/bar-stool.jpg";
@@ -28,14 +28,34 @@ export default function Header() {
 
   const closeCollections = () => setCollectionsOpen(false);
 
+  useEffect(() => {
+    if (!collectionsOpen) return;
+
+    const handleScroll = () => {
+      setCollectionsOpen(false);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [collectionsOpen]);
+
   return (
     <header className="site-header">
-      <Link className="brand" to="/" aria-label="ARK STUDIO home">
+      <Link className="brand" to="/" aria-label="ARK STUDIO home" onClick={closeCollections}>
         <img src={logoImage} alt="ARK STUDIO by Lohar Creations" />
       </Link>
 
       <nav className="main-nav" aria-label="Main navigation">
-        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/">Home</NavLink>
+        <NavLink
+          className={({ isActive }) => isActive ? "active" : ""}
+          to="/"
+          onClick={closeCollections}
+        >
+          Home
+        </NavLink>
 
         <div className="collections-nav-item">
           <button
@@ -88,12 +108,12 @@ export default function Header() {
         </div>
 
         {/* <a href="#customization">Customization</a> */}
-        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/projects">Projects</NavLink>
-        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/about">About Us</NavLink>
-        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/contact">Contact</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/projects" onClick={closeCollections}>Projects</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/about" onClick={closeCollections}>About Us</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/contact" onClick={closeCollections}>Contact</NavLink>
       </nav>
 
-      <Link className="header-cta" to="/contact">
+      <Link className="header-cta" to="/contact" onClick={closeCollections}>
   Enquire Now
 </Link>
     </header>
