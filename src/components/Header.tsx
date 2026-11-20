@@ -9,6 +9,7 @@ import gazeboImage from "../assets/images/gazebo.png";
 import pergolaImage from "../assets/images/pergola.png";
 import poolLoungerImage from "../assets/images/poolside.png";
 import umbrellaImage from "../assets/images/umbrella.png";
+import outdoorChairImage from "../assets/images/outdoor-chairs/1.png";
 
 const collections = [
   { name: "Bar Stool", slug: "bar-stool", image: barStoolImage },
@@ -19,6 +20,7 @@ const collections = [
   { name: "Pergola", slug: "pergola", image: pergolaImage },
   { name: "Pool Lounger", slug: "poolside-furniture", image: poolLoungerImage },
   { name: "Umbrella", slug: "umbrella", image: umbrellaImage },
+  { name: "Outdoor Chair", slug: "outdoor-chairs", image: outdoorChairImage },
 ];
 
 export default function Header() {

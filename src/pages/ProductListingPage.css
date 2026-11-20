@@ -206,6 +206,38 @@
   text-decoration: none;
 }
 
+.sidebar-call-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid #0d3022;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.sidebar-call-link svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  stroke-width: 1.8;
+}
+
+.sidebar-call-link:hover,
+.sidebar-call-link:focus-visible {
+  border-color: #0d3022;
+  background: #0d3022;
+  color: #fff;
+}
+
+.sidebar-call-link:focus-visible {
+  outline: 2px solid #a17a42;
+  outline-offset: 3px;
+}
+
 .product-results-top {
   display: flex;
   justify-content: space-between;

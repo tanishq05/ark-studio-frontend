@@ -9,6 +9,7 @@ import gazeboImage from "../assets/images/gazebo.png";
 import pergolaImage from "../assets/images/pergola.png";
 import poolLoungerImage from "../assets/images/poolside.png";
 import umbrellaImage from "../assets/images/umbrella.png";
+import outdoorChairImage from "../assets/images/outdoor-chairs/1.png";
 import msFrameImage from "../assets/images/ms-frame.png";
 import aluminiumFrameImage from "../assets/images/aluminium-frame.png";
 import wickerImage from "../assets/images/wicker-sample.png";
@@ -72,6 +73,11 @@ const collections = [
     name: "Umbrella",
     slug: "umbrella",
     image: umbrellaImage,
+  },
+  {
+    name: "Outdoor Chair",
+    slug: "outdoor-chairs",
+    image: outdoorChairImage,
   },
 ];
 

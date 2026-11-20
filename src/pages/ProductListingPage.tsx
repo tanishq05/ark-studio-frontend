@@ -1,16 +1,8 @@
 
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Phone } from "lucide-react";
 import "./ProductListingPage.css";
-
-import barStoolImage from "../assets/images/bar-stool.jpg";
-import sofaSetImage from "../assets/images/sofa-set.jpg";
-import diningSetImage from "../assets/images/dining-set.jpg";
-import swingImage from "../assets/images/swing.png";
-import gazeboImage from "../assets/images/gazebo.png";
-import pergolaImage from "../assets/images/pergola.png";
-import poolLoungerImage from "../assets/images/poolside.png";
-import umbrellaImage from "../assets/images/umbrella.png";
 
 type Product = {
   id: number;
@@ -19,16 +11,40 @@ type Product = {
   image: string;
 };
 
-const products: Product[] = [
-  { id: 1, name: "Signature Bar Stool", category: "Bar Furniture", image: barStoolImage },
-  { id: 2, name: "Outdoor Sofa Collection", category: "Sofa Sets", image: sofaSetImage },
-  { id: 3, name: "Classic Dining Set", category: "Dining Sets", image: diningSetImage },
-  { id: 4, name: "Garden Swing", category: "Swings", image: swingImage },
-  { id: 5, name: "Garden Gazebo", category: "Gazebos", image: gazeboImage },
-  { id: 6, name: "Modern Pergola", category: "Pergolas", image: pergolaImage },
-  { id: 7, name: "Poolside Lounger", category: "Poolside Furniture", image: poolLoungerImage },
-  { id: 8, name: "Outdoor Umbrella", category: "Umbrellas", image: umbrellaImage },
+type CategoryAssets = {
+  category: string;
+  label: string;
+  images: Record<string, unknown>;
+};
+
+const categoryAssets: CategoryAssets[] = [
+  { category: "Bar Furniture", label: "Bar Stool", images: import.meta.glob("../assets/images/bar-stool/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
+  { category: "Sofa Sets", label: "Sofa Set", images: import.meta.glob("../assets/images/sofa-set/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
+  { category: "Dining Sets", label: "Dining Set", images: import.meta.glob("../assets/images/dining-set/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
+  { category: "Swings", label: "Garden Swing", images: import.meta.glob("../assets/images/swings/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
+  { category: "Gazebos", label: "Garden Gazebo", images: import.meta.glob("../assets/images/gazebos/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
+  { category: "Pergolas", label: "Pergola", images: import.meta.glob("../assets/images/pergola/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
+  { category: "Poolside Furniture", label: "Poolside Lounger", images: import.meta.glob("../assets/images/poolside/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
+  { category: "Umbrellas", label: "Outdoor Umbrella", images: import.meta.glob("../assets/images/umbrella/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
+  { category: "Outdoor Chairs", label: "Outdoor Chair", images: import.meta.glob("../assets/images/outdoor-chairs/*.{png,jpg,jpeg}", { eager: true, query: "?url", import: "default" }) },
 ];
+
+function sortAssetPaths([pathA]: [string, unknown], [pathB]: [string, unknown]) {
+  const numberA = Number(pathA.match(/(\d+)(?=\.[^.]+$)/)?.[1] ?? 0);
+  const numberB = Number(pathB.match(/(\d+)(?=\.[^.]+$)/)?.[1] ?? 0);
+  return numberA - numberB;
+}
+
+const products: Product[] = categoryAssets.flatMap((group, groupIndex) =>
+  Object.entries(group.images)
+    .sort(sortAssetPaths)
+    .map(([, image], imageIndex) => ({
+      id: groupIndex * 100 + imageIndex + 1,
+      name: `${group.label} ${String(imageIndex + 1).padStart(2, "0")}`,
+      category: group.category,
+      image: image as string,
+    })),
+);
 
 const categories = [
   "All Furniture",
@@ -40,6 +56,7 @@ const categories = [
   "Pergolas",
   "Poolside Furniture",
   "Umbrellas",
+  "Outdoor Chairs",
 ];
 
 function ProductListingPage() {
@@ -53,6 +70,7 @@ function ProductListingPage() {
   pergola: "Pergolas",
   "poolside-furniture": "Poolside Furniture",
   umbrella: "Umbrellas",
+  "outdoor-chairs": "Outdoor Chairs",
 };
 
 const initialCategory = categorySlugMap[categorySlug ?? ""] ?? "All Furniture";
@@ -143,7 +161,10 @@ const [activeCategory, setActiveCategory] = useState(initialCategory);
                 Looking for a particular size, finish, or design? Talk to us
                 about a custom piece.
               </p>
-              <Link to="/contact">Enquire now ↗</Link>
+              <a href="tel:+9115555640" className="sidebar-call-link">
+                <Phone aria-hidden="true" />
+                <span>Call Us</span>
+              </a>
             </div>
           </aside>
 
