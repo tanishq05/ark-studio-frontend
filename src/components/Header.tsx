@@ -85,14 +85,14 @@ export default function Header() {
         </div>
 
         {/* <a href="#customization">Customization</a> */}
-        <a href="#projects">Projects</a>
-        <a href="#aboutUs">About Us</a>
-        <a href="#contact">Contact</a>
+        <a href="/projects">Projects</a>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact</a>
       </nav>
 
-      <a className="header-cta" href="#contact">
-        Enquire Now <span>↗</span>
-      </a>
+      <a className="header-cta" href="/contact">
+  Enquire Now
+</a>
     </header>
   );
 }
