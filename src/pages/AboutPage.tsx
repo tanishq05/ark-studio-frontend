@@ -171,9 +171,14 @@ export default function AboutPage() {
         <p>
           Let's create an outdoor space that feels distinctly yours.
         </p>
-        <Link to="/contact" className="about-cta">
+        <a
+          href="https://wa.me/919115555640?text=Hi%2C%20I%20would%20like%20to%20request%20the%20ARK%20STUDIO%20product%20catalog."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="about-cta"
+        >
           Start a Conversation <span aria-hidden="true">↗</span>
-        </Link>
+        </a>
       </section>
     </div>
   );
